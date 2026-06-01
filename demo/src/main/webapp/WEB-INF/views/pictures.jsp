@@ -1,0 +1,31 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pictures</title>
+</head>
+<body>
+
+<h2>All Pictures</h2>
+
+<form method="post" action="/api/pictures/upload" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+
+<hr>
+
+<c:forEach var="picture" items="${pictures}">
+    <div>
+        <p>Author: ${picture.author.username}</p>
+        <p>Filename: ${picture.filename}</p>
+
+        <img src="/api/pictures/image/${picture.id}" width="250">
+
+        <hr>
+    </div>
+</c:forEach>
+
+</body>
+</html>

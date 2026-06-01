@@ -31,4 +31,5 @@ public class Picture {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Users author;
+
 }
