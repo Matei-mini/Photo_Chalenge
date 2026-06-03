@@ -4,6 +4,7 @@ import com.example.demo.models.Picture;
 import com.example.demo.models.Users;
 import com.example.demo.service.PictureService;
 import com.example.demo.service.UsersService;
+import com.example.demo.service.VoteService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class PictureController {
     private final PictureService pictureService;
     private final UsersService usersService;
+    private final VoteService voteService;
 
-    public PictureController(PictureService pictureService, UsersService usersService){
+    public PictureController(PictureService pictureService, UsersService usersService, VoteService voteService){
         this.pictureService = pictureService;
         this.usersService = usersService;
+        this.voteService = voteService;
     }
 
     @GetMapping("")
@@ -31,6 +34,7 @@ public class PictureController {
             return "redirect:/users/login";
         model.addAttribute("pictures", pictureService.getAllPictures());
         model.addAttribute("currentUserId", user);
+        model.addAttribute("voteTotals", voteService.getTotalVotes());
         return "pictures";
     }
 
