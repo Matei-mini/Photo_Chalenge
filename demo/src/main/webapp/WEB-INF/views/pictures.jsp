@@ -13,6 +13,8 @@
     <input type="file" name="file" required>
     <button type="submit">Upload</button>
 </form>
+<hr>
+<a href="/api/top">Top Pictures</a>
 
 <hr>
 
