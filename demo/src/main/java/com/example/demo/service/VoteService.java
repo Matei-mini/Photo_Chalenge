@@ -1,16 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.models.Picture;
+import com.example.demo.models.PictureDTO;
 import com.example.demo.models.Vote;
 import com.example.demo.repository.PictureRepository;
 import com.example.demo.repository.UsersRepository;
 import com.example.demo.repository.VoteRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -59,5 +61,11 @@ public class VoteService {
             votes.put(pid, total);
         }
         return votes;
+    }
+
+    public List<PictureDTO> getTopN(Integer n){
+        logger.info("GetTopN started in the VoteRepository.");
+        List<PictureDTO> list = voteRepository.findTopPictures(PageRequest.of(0, n));
+        return list;
     }
 }
